@@ -3,7 +3,7 @@
     <button
       class="bard-toolbar-button"
       :class="{
-        active: getMarkAttrs('textColor').color != null,
+        active: showColorMenu,
       }"
       v-html="button.html"
       v-tooltip="button.text"
@@ -11,14 +11,14 @@
     />
     <div class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
       <template v-for="(color, index) in availableColors" >
-        <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 lg:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
-          <div class="w-6 h-6 mx-2" :style="'background-color:'+color+';'"></div>
-          <p class="text-center">{{ index }}</p>
+        <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
+          <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
+          <p class="text-center" style="font-size: 0.75rem!important;">{{ index }}</p>
         </div>
         <template v-if="typeof color == 'object'">
-          <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 lg:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
-            <div class="w-6 h-6 mx-2" :style="'background-color:'+hex+';'"></div>
-            <p class="text-center px-1">{{ index + '-' + intensity }}</p>
+          <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
+            <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
+            <p class="text-center px-1" style="font-size: 0.75rem!important;">{{ index + '-' + intensity }}</p>
           </div>
         </template>
       </template>
@@ -55,6 +55,9 @@ export default {
   .max-h-300px {
     max-height: 300px;
   }
+  .max-h-320px {
+    max-height: 300px;
+  }
   .px-1 {
     padding-left: 0.25rem;
     padding-right: 0.25rem;
@@ -74,6 +77,10 @@ export default {
   }
   .text-center {
     text-align: center;
+  }
+  .mx-1 {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
   }
   .mx-2 {
     margin-left: 0.5rem;
@@ -168,7 +175,7 @@ export default {
       width: 50%;
     }
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     .lg\:w-full {
       width: 100%;
     }
