@@ -23,7 +23,7 @@
     },
     "laravel": {
       "providers": [
-        "XndBogdan\\BardTextColor\\TextColorServiceProvider"
+        "XndBogdan\\BardTextColor\\ServiceProvider"
       ]
     }
   },
