@@ -9,7 +9,7 @@
       v-tooltip="button.text"
       @click="showColorMenu = !showColorMenu"
     />
-    <div class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10" :class="{ hidden: !showColorMenu }">
+    <div class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
       <template v-for="(color, index) in availableColors" >
         <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 lg:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
           <div class="w-6 h-6 mx-2" :style="'background-color:'+color+';'"></div>
@@ -18,7 +18,7 @@
         <template v-if="typeof color == 'object'">
           <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 lg:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
             <div class="w-6 h-6 mx-2" :style="'background-color:'+hex+';'"></div>
-            <p class="text-center">{{ index + '-' + intensity }}</p>
+            <p class="text-center px-1">{{ index + '-' + intensity }}</p>
           </div>
         </template>
       </template>
@@ -49,6 +49,12 @@ export default {
 };
 </script>
 <style>
+  .overflow-y-scroll {
+    overflow-y: scroll;
+  }
+  .max-h-300px {
+    max-height: 300px;
+  }
   .px-1 {
     padding-left: 0.25rem;
     padding-right: 0.25rem;
