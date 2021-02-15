@@ -8,7 +8,6 @@ At the moment it's still under development. Please report any bugs that you have
 
 ## Installation guide
 
-- make sure that your minimum stability is set to dev, at least for now
 - composer require xndbogdan/statamic-bard-text-color
 
 ![Statamic 3.0+](https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge&link=https://statamic.com)
