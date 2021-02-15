@@ -1,0 +1,35 @@
+{
+  "require": {
+    "php": "^7.4 | ^8.0",
+    "statamic/cms": "^3.0.14"
+  },
+  "name": "xndbogdan/statamic-bard-text-color",
+  "keywords": [
+    "statamic",
+    "bard",
+    "text-color"
+  ],
+  "description": "Statamic Bard Text Color",
+  "autoload": {
+    "psr-4": {
+      "XndBogdan\\BardTextColor\\": "src"
+    }
+  },
+  "type": "statamic-addon",
+  "extra": {
+    "statamic": {
+      "name": "Statamic Bard Text Color",
+      "description": "Text Color plugin for statamic bard"
+    },
+    "laravel": {
+      "providers": [
+        "XndBogdan\\BardTextColor\\TextColorServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
