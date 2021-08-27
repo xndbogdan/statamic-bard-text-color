@@ -10,7 +10,18 @@
       @click="showColorMenu = !showColorMenu"
     />
     <div class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
-      <template v-for="(color, index) in availableColors" >
+      <div class="flex flex-wrap py-2 w-full px-1" v-if="availableCustomColors">
+        <p class="font-bold w-full mb-2">Color pack</p>
+        <div class="inline-flex items-center">
+            <input id="radio-color-default" class="form-radio" type="radio" v-model="selectedGroup" value="default" @click="switchColors('default')">
+            <label for="radio-color-default" style="margin-left: .2rem;">Default</label>
+        </div>
+        <div class="pl-2 inline-flex items-center">
+            <input id="radio-color-custom" class="form-radio" type="radio" v-model="selectedGroup" value="custom" @click="switchColors('custom')">
+            <label for="radio-color-custom" style="margin-left: .2rem;">Custom</label>
+        </div>
+      </div>
+      <template v-for="(color, index) in selectedColors" >
         <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
           <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
           <p class="text-center" style="font-size: 0.75rem!important;">{{ index }}</p>
@@ -27,7 +38,12 @@
 </template>
 <script>
 
+import resolveConfig from 'tailwindcss/resolveConfig'
+import tailwindConfig from '../../../../tailwind.config.js'
+
+const resolvedConfig = resolveConfig(tailwindConfig)
 const defaultTheme = require('tailwindcss/defaultTheme')
+const customTheme = resolvedConfig.theme
 
 export default {
   mixins: [ BardToolbarButton ],
@@ -35,6 +51,9 @@ export default {
     return {
       showColorMenu: false,
       availableColors: defaultTheme.colors,
+      availableCustomColors: customTheme.colors,
+      selectedColors: defaultTheme.colors,
+      selectedGroup: 'default',
       getMarkAttrs: this.editor.getMarkAttrs.bind(this.editor),
     };
   },
@@ -43,8 +62,23 @@ export default {
       this.editor.commands.textColor({ color: color })
       this.showColorMenu = false
     },
+    switchColors(group) {
+        switch(group) {
+            case 'default':
+                this.selectedColors = this.availableColors
+            break;
+            case 'custom':
+                this.selectedColors = this.availableCustomColors
+            break;
+        }
+    }
   },
-  mounted() {
+  created() {
+      if(this.availableCustomColors && this.availableCustomColors.length) {
+          switchColors('custom')
+      } else {
+          switchColors('default')
+      }
   }
 };
 </script>
