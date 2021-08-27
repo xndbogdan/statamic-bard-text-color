@@ -1,6 +1,6 @@
 # Statamic Bard Text Color Extension
 
-![alt text](https://github.com/xndbogdan/statamic-bard-text-color/blob/main/preview_v1.2.png "Preview")
+![alt text](https://github.com/xndbogdan/statamic-bard-text-color/blob/main/preview_v2.0.png "Preview")
 
 A statamic bard plugin that lets you change text color!
 It allows you to use the default tailwind colors.
@@ -16,3 +16,4 @@ At the moment it's still under development. Please report any bugs that you have
 ## New additions
 
 - color menu is now scrollable, instead of filling the whole screen
+- custom theme colors are now available
