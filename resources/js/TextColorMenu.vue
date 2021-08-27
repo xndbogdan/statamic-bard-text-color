@@ -65,9 +65,11 @@ export default {
     switchColors(group) {
         switch(group) {
             case 'default':
+                this.selectedGroup = 'default'
                 this.selectedColors = this.availableColors
             break;
             case 'custom':
+                this.selectedGroup = 'custom'
                 this.selectedColors = this.availableCustomColors
             break;
         }
@@ -75,9 +77,9 @@ export default {
   },
   created() {
       if(this.availableCustomColors && this.availableCustomColors.length) {
-          switchColors('custom')
+          this.switchColors('custom')
       } else {
-          switchColors('default')
+          this.switchColors('default')
       }
   }
 };
