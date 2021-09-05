@@ -15,7 +15,8 @@ class TextColor extends Mark
 
     public function tag(): ?array {
         return [
-            ['tag' => 'span',
+            [
+                'tag' => 'span',
                 'attrs' => [
                     'style' => "color:{$this->mark->attrs->color}!important;",
                 ],
