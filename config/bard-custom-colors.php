@@ -2,7 +2,7 @@
   /*
    * An array of custom colors.
    * Declare them like this:
-   * 'drunken-pinguin' => '#F5F3EF'
+   * 'drunken-penguin' => '#F5F3EF'
    * You can also have colors declared like this
    * 'red' => [
    *    '100' => '#fff5f5',
