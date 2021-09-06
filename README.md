@@ -22,7 +22,7 @@ If you only wish to use the default tailwind palette, then it's as easy as runni
 ## Custom colors
 
 ### Using a config file
-The simplest way of adding new colors to this plugin is by creating a  `bard-custom-colors.php`  config file to your project.
+The simplest way of adding new colors to this plugin is by adding a  `bard-custom-colors.php`  config file to your project.
 Please check [this](https://github.com/xndbogdan/statamic-bard-text-color/blob/main/config/bard-custom-colors.php) file if you need an example.
 
 ### Pulling colors from tailwind.config.js automatically
