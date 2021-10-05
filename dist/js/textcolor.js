@@ -6693,10 +6693,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 Statamic.booting(function () {
-  var defaultColors = Statamic.$config.get('bard-default-colors') || null;
   var customColors = Statamic.$config.get('bard-custom-colors') || null;
-  window.bardDefaultColors = defaultColors;
+  var defaultColors = Statamic.$config.get('bard-default-colors') || null;
+  if (defaultColors && defaultColors.length === 0) {
+    defaultColors = null;
+  }
+
   window.bardCustomColors = customColors;
+  window.bardDefaultColors = defaultColors;
   Statamic.$bard.extend(function (_ref) {
     var mark = _ref.mark;
     return mark(new _TextColor__WEBPACK_IMPORTED_MODULE_0__["default"]());
