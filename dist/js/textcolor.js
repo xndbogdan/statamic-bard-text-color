@@ -167,7 +167,7 @@ var defaultTheme = __webpack_require__(/*! tailwindcss/defaultTheme */ "./node_m
   data: function data() {
     return {
       showColorMenu: false,
-      availableColors: defaultTheme.colors,
+      availableColors: null,
       availableCustomColors: null,
       selectedColors: defaultTheme.colors,
       selectedGroup: 'default',
@@ -197,6 +197,7 @@ var defaultTheme = __webpack_require__(/*! tailwindcss/defaultTheme */ "./node_m
   },
   mounted: function mounted() {
     this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null;
+    this.availableColors = window.bardDefaultColors ? window.bardDefaultColors : defaultTheme.colors;
   },
   created: function created() {}
 });
@@ -6692,7 +6693,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 Statamic.booting(function () {
+  var defaultColors = Statamic.$config.get('bard-default-colors') || null;
   var customColors = Statamic.$config.get('bard-custom-colors') || null;
+  window.bardDefaultColors = defaultColors;
   window.bardCustomColors = customColors;
   Statamic.$bard.extend(function (_ref) {
     var mark = _ref.mark;
