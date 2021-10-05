@@ -20,10 +20,11 @@ return [
     |
     */
 
+    /*
     'custom_colors' => [
-        'pechet-light-blue' => '#b8d4d4',
-        'pechet-dark-blue' => '#519098',
+        'drunken-penguin' => '#F5F3EF',
     ],
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -46,8 +47,10 @@ return [
     |
     */
 
+    /*
     'default_colors' => [
         'black' => '#000000',
         'white' => '#FFFFFF',
     ],
+    */
 ];
