@@ -21,7 +21,8 @@ class ServiceProvider extends AddonServiceProvider
 
         Augmentor::addMark(TextColor::class);
         Statamic::provideToScript([
-            'bard-custom-colors' => config('bard-custom-colors'),
+            'bard-custom-colors' => config('bard-custom-colors.custom_colors', config('bard-custom-colors')),
+            'bard-default-colors' => config('bard-custom-colors.default_colors'),
         ]);
     }
 }
