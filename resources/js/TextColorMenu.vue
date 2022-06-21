@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block relative">
+  <div class="inline-block relative" v-if="enabled" v-click-outside="onClickOutside">
     <button
       class="bard-toolbar-button"
       :class="{
@@ -64,6 +64,7 @@
   </div>
 </template>
 <script>
+import ClickOutside from 'vue-click-outside'
 const defaultTheme = require('tailwindcss/defaultTheme')
 export default {
   mixins: [ BardToolbarButton ],
@@ -75,9 +76,16 @@ export default {
       selectedColors: defaultTheme.colors,
       selectedGroup: 'default',
       getMarkAttrs: this.editor.getMarkAttrs.bind(this.editor),
+      enabled: false,
     };
   },
+  directives: {
+    ClickOutside
+  },
   methods: {
+    onClickOutside() {
+      this.showColorMenu = false;
+    },
     setColor(color) {
       this.editor.commands.textColor({ color: color })
       this.showColorMenu = false
@@ -97,12 +105,15 @@ export default {
   },
   mounted() {
       this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null
+      if(this.config && this.config.buttons.includes('color')) {
+        this.enabled = true
+      }
   },
   created() {
   }
 };
 </script>
-<style>
+<style scoped>
   .overflow-y-scroll {
     overflow-y: scroll;
   }
