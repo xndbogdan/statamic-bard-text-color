@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block relative">
+  <div class="inline-block relative" v-if="enabled">
     <button
       class="bard-toolbar-button"
       :class="{
@@ -9,7 +9,7 @@
       v-tooltip="button.text"
       @click="showColorMenu = !showColorMenu"
     />
-    <div class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
+    <div @focusout="showColorMenu = false" class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
       <div class="flex flex-wrap py-2 w-full px-1">
         <p class="font-bold w-full mb-2">Color pack</p>
         <div class="inline-flex items-center">
@@ -75,6 +75,7 @@ export default {
       selectedColors: defaultTheme.colors,
       selectedGroup: 'default',
       getMarkAttrs: this.editor.getMarkAttrs.bind(this.editor),
+      enabled: false,
     };
   },
   methods: {
@@ -97,12 +98,16 @@ export default {
   },
   mounted() {
       this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null
+      // check if bard button is enabled
+      if(this.config && this.config.buttons.includes('color')) {
+        this.enabled = true
+      }
   },
   created() {
   }
 };
 </script>
-<style>
+<style scoped>
   .overflow-y-scroll {
     overflow-y: scroll;
   }

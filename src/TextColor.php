@@ -2,7 +2,7 @@
 
 namespace XndBogdan\BardTextColor;
 
-use ProseMirrorToHtml\Marks\Mark;
+use Tiptap\Core\Mark;
 
 class TextColor extends Mark
 {

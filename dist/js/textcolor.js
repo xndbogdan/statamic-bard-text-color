@@ -167,11 +167,12 @@ var defaultTheme = __webpack_require__(/*! tailwindcss/defaultTheme */ "./node_m
   data: function data() {
     return {
       showColorMenu: false,
-      availableColors: null,
+      availableColors: defaultTheme.colors,
       availableCustomColors: null,
       selectedColors: defaultTheme.colors,
       selectedGroup: 'default',
-      getMarkAttrs: this.editor.getMarkAttrs.bind(this.editor)
+      getMarkAttrs: this.editor.getMarkAttrs.bind(this.editor),
+      enabled: false
     };
   },
   methods: {
@@ -196,18 +197,21 @@ var defaultTheme = __webpack_require__(/*! tailwindcss/defaultTheme */ "./node_m
     }
   },
   mounted: function mounted() {
-    this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null;
-    this.availableColors = window.bardDefaultColors ? window.bardDefaultColors : defaultTheme.colors;
+    this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null; // check if bard button is enabled
+
+    if (this.config && this.config.buttons.includes('color')) {
+      this.enabled = true;
+    }
   },
   created: function created() {}
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -216,7 +220,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.overflow-y-scroll {\n  overflow-y: scroll;\n}\n.max-h-300px {\n  max-height: 300px;\n}\n.max-h-320px {\n  max-height: 300px;\n}\n.px-1 {\n  padding-left: 0.25rem;\n  padding-right: 0.25rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.hover\\:bg-gray-300:hover {\n  background-color: rgba(209, 213, 219, 1);\n}\n.z-10 {\n  z-index:10;\n}\n.text-center {\n  text-align: center;\n}\n.mx-1 {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.mr-2 {\n  margin-right: 0.5rem;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.my-1 {\n  margin-top:.25rem;\n  margin-bottom:.25rem;\n}\n.rounded-xl {\n  border-radius: 0.75rem;\n}\n.bg-gray-50 {\n  background-color: rgba(249, 250, 251, 1);\n}\n.bg-gray-200 {\n  background-color: rgba(229, 231, 235, 1);\n}\n.flex {\n  display: flex;\n}\n.flex-wrap {\n  flex-wrap: wrap;\n}\n.items-center {\n  align-items: center;\n}\n.flex-row {\n  flex-direction: row;\n}\n.flex-col {\n  flex-direction: column;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-start {\n  justify-content: start;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n@media (min-width: 0px) {\n.w-full {\n    width: 100%;\n}\n.w-1\\/4 {\n    width: 25%;\n}\n.w-1\\/2 {\n    width: 50%;\n}\n.min-w-250 {\n    min-width:250px;\n}\n.min-w-500 {\n    min-width:500px;\n}\n}\n@media (min-width: 640px) {\n.sm\\:text-xl {\n    font-size: 1.25rem;\n    line-height: 1.75rem;\n}\n.sm\\:w-full {\n    width: 100%;\n}\n.sm\\:w-1\\/4 {\n    width: 25%;\n}\n.sm\\:w-1\\/2 {\n    width: 50%;\n}\n}\n@media (min-width: 768px) {\n.md\\:w-full {\n    width: 100%;\n}\n.md\\:w-1\\/4 {\n    width: 25%;\n}\n.md\\:w-1\\/2 {\n    width: 50%;\n}\n}\n@media (min-width: 1280px) {\n.lg\\:w-full {\n    width: 100%;\n}\n.lg\\:w-1\\/4 {\n    width: 25%;\n}\n.lg\\:w-1\\/2 {\n    width: 50%;\n}\n.lg\\:min-w-250 {\n    min-width:250px;\n}\n.lg\\:min-w-500 {\n    min-width:500px;\n}\n}\n", ""]);
+exports.push([module.i, "\n.overflow-y-scroll[data-v-57133487] {\n  overflow-y: scroll;\n}\n.max-h-300px[data-v-57133487] {\n  max-height: 300px;\n}\n.max-h-320px[data-v-57133487] {\n  max-height: 300px;\n}\n.px-1[data-v-57133487] {\n  padding-left: 0.25rem;\n  padding-right: 0.25rem;\n}\n.py-1[data-v-57133487] {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.cursor-pointer[data-v-57133487] {\n  cursor: pointer;\n}\n.hover\\:bg-gray-300[data-v-57133487]:hover {\n  background-color: rgba(209, 213, 219, 1);\n}\n.z-10[data-v-57133487] {\n  z-index:10;\n}\n.text-center[data-v-57133487] {\n  text-align: center;\n}\n.mx-1[data-v-57133487] {\n  margin-left: 0.25rem;\n  margin-right: 0.25rem;\n}\n.mx-2[data-v-57133487] {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.mr-2[data-v-57133487] {\n  margin-right: 0.5rem;\n}\n.mt-2[data-v-57133487] {\n  margin-top: 0.5rem;\n}\n.my-1[data-v-57133487] {\n  margin-top:.25rem;\n  margin-bottom:.25rem;\n}\n.rounded-xl[data-v-57133487] {\n  border-radius: 0.75rem;\n}\n.bg-gray-50[data-v-57133487] {\n  background-color: rgba(249, 250, 251, 1);\n}\n.bg-gray-200[data-v-57133487] {\n  background-color: rgba(229, 231, 235, 1);\n}\n.flex[data-v-57133487] {\n  display: flex;\n}\n.flex-wrap[data-v-57133487] {\n  flex-wrap: wrap;\n}\n.items-center[data-v-57133487] {\n  align-items: center;\n}\n.flex-row[data-v-57133487] {\n  flex-direction: row;\n}\n.flex-col[data-v-57133487] {\n  flex-direction: column;\n}\n.justify-center[data-v-57133487] {\n  justify-content: center;\n}\n.justify-start[data-v-57133487] {\n  justify-content: start;\n}\n.w-6[data-v-57133487] {\n  width: 1.5rem;\n}\n.h-6[data-v-57133487] {\n  height: 1.5rem;\n}\n@media (min-width: 0px) {\n.w-full[data-v-57133487] {\n    width: 100%;\n}\n.w-1\\/4[data-v-57133487] {\n    width: 25%;\n}\n.w-1\\/2[data-v-57133487] {\n    width: 50%;\n}\n.min-w-250[data-v-57133487] {\n    min-width:250px;\n}\n.min-w-500[data-v-57133487] {\n    min-width:500px;\n}\n}\n@media (min-width: 640px) {\n.sm\\:text-xl[data-v-57133487] {\n    font-size: 1.25rem;\n    line-height: 1.75rem;\n}\n.sm\\:w-full[data-v-57133487] {\n    width: 100%;\n}\n.sm\\:w-1\\/4[data-v-57133487] {\n    width: 25%;\n}\n.sm\\:w-1\\/2[data-v-57133487] {\n    width: 50%;\n}\n}\n@media (min-width: 768px) {\n.md\\:w-full[data-v-57133487] {\n    width: 100%;\n}\n.md\\:w-1\\/4[data-v-57133487] {\n    width: 25%;\n}\n.md\\:w-1\\/2[data-v-57133487] {\n    width: 50%;\n}\n}\n@media (min-width: 1280px) {\n.lg\\:w-full[data-v-57133487] {\n    width: 100%;\n}\n.lg\\:w-1\\/4[data-v-57133487] {\n    width: 25%;\n}\n.lg\\:w-1\\/2[data-v-57133487] {\n    width: 50%;\n}\n.lg\\:min-w-250[data-v-57133487] {\n    min-width:250px;\n}\n.lg\\:min-w-500[data-v-57133487] {\n    min-width:500px;\n}\n}\n", ""]);
 
 // exports
 
@@ -4135,15 +4139,15 @@ module.exports = stubFalse;
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../node_modules/css-loader??ref--5-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/postcss-loader/src??ref--5-2!../../node_modules/vue-loader/lib??vue-loader-options!./TextColorMenu.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../node_modules/css-loader??ref--5-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/postcss-loader/src??ref--5-2!../../node_modules/vue-loader/lib??vue-loader-options!./TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -5971,10 +5975,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&":
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/TextColorMenu.vue?vue&type=template&id=57133487& ***!
-  \*****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5986,319 +5990,326 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "inline-block relative" }, [
-    _c("button", {
-      directives: [
-        {
-          name: "tooltip",
-          rawName: "v-tooltip",
-          value: _vm.button.text,
-          expression: "button.text"
-        }
-      ],
-      staticClass: "bard-toolbar-button",
-      class: {
-        active: _vm.showColorMenu
-      },
-      domProps: { innerHTML: _vm._s(_vm.button.html) },
-      on: {
-        click: function($event) {
-          _vm.showColorMenu = !_vm.showColorMenu
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll",
-        class: { hidden: !_vm.showColorMenu }
-      },
-      [
-        _c("div", { staticClass: "flex flex-wrap py-2 w-full px-1" }, [
-          _c("p", { staticClass: "font-bold w-full mb-2" }, [
-            _vm._v("Color pack")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "inline-flex items-center" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.selectedGroup,
-                  expression: "selectedGroup"
-                }
-              ],
-              staticClass: "form-radio",
-              attrs: {
-                id: "radio-color-default",
-                type: "radio",
-                value: "default"
-              },
-              domProps: { checked: _vm._q(_vm.selectedGroup, "default") },
-              on: {
-                click: function($event) {
-                  return _vm.switchColors("default")
-                },
-                change: function($event) {
-                  _vm.selectedGroup = "default"
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticStyle: { "margin-left": ".2rem" },
-                attrs: { for: "radio-color-default" }
-              },
-              [_vm._v("Default")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "pl-2 inline-flex items-center" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.selectedGroup,
-                  expression: "selectedGroup"
-                }
-              ],
-              staticClass: "form-radio",
-              attrs: {
-                id: "radio-color-custom",
-                type: "radio",
-                value: "custom"
-              },
-              domProps: { checked: _vm._q(_vm.selectedGroup, "custom") },
-              on: {
-                click: function($event) {
-                  return _vm.switchColors("custom")
-                },
-                change: function($event) {
-                  _vm.selectedGroup = "custom"
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticStyle: { "margin-left": ".2rem" },
-                attrs: { for: "radio-color-custom" }
-              },
-              [_vm._v("Custom")]
-            )
-          ])
-        ]),
+  return _vm.enabled
+    ? _c("div", { staticClass: "inline-block relative" }, [
+        _c("button", {
+          directives: [
+            {
+              name: "tooltip",
+              rawName: "v-tooltip",
+              value: _vm.button.text,
+              expression: "button.text"
+            }
+          ],
+          staticClass: "bard-toolbar-button",
+          class: {
+            active: _vm.showColorMenu
+          },
+          domProps: { innerHTML: _vm._s(_vm.button.html) },
+          on: {
+            click: function($event) {
+              _vm.showColorMenu = !_vm.showColorMenu
+            }
+          }
+        }),
         _vm._v(" "),
-        _vm.selectedGroup == "default"
-          ? _c(
-              "div",
-              { staticClass: "flex flex-wrap w-full" },
-              [
-                _vm._l(_vm.availableColors, function(color, index) {
-                  return [
-                    typeof color == "string" &&
-                    index != "transparent" &&
-                    index != "current"
-                      ? _c(
-                          "div",
-                          {
-                            key: index,
-                            staticClass:
-                              "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
-                            on: {
-                              click: function($event) {
-                                return _vm.setColor(color)
-                              }
-                            }
-                          },
-                          [
-                            _c("div", {
-                              staticClass: "w-6 h-6 mx-1",
-                              staticStyle: { border: "1px solid #000" },
-                              style: "background-color:" + color + ";"
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass: "text-center",
-                                staticStyle: {
-                                  "font-size": "0.75rem!important"
-                                }
-                              },
-                              [_vm._v(_vm._s(index))]
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    typeof color == "object"
-                      ? _vm._l(color, function(hex, intensity) {
-                          return _c(
-                            "div",
-                            {
-                              key: index + "-" + intensity,
-                              staticClass:
-                                "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
-                              on: {
-                                click: function($event) {
-                                  return _vm.setColor(hex)
-                                }
-                              }
-                            },
-                            [
-                              _c("div", {
-                                staticClass: "w-6 h-6 mx-1",
-                                staticStyle: { border: "1px solid #000" },
-                                style: "background-color:" + hex + ";"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass: "text-center px-1",
-                                  staticStyle: {
-                                    "font-size": "0.75rem!important"
-                                  }
-                                },
-                                [_vm._v(_vm._s(index + "-" + intensity))]
-                              )
-                            ]
-                          )
-                        })
-                      : _vm._e()
-                  ]
-                })
-              ],
-              2
-            )
-          : _vm.availableCustomColors
-          ? _c(
-              "div",
-              { staticClass: "flex flex-wrap w-full" },
-              [
-                _vm._l(_vm.availableCustomColors, function(color, index) {
-                  return [
-                    typeof color == "string" &&
-                    index != "transparent" &&
-                    index != "current"
-                      ? _c(
-                          "div",
-                          {
-                            key: index,
-                            staticClass:
-                              "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
-                            on: {
-                              click: function($event) {
-                                return _vm.setColor(color)
-                              }
-                            }
-                          },
-                          [
-                            _c("div", {
-                              staticClass: "w-6 h-6 mx-1",
-                              staticStyle: { border: "1px solid #000" },
-                              style: "background-color:" + color + ";"
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "p",
-                              {
-                                staticClass: "text-center",
-                                staticStyle: {
-                                  "font-size": "0.75rem!important"
-                                }
-                              },
-                              [_vm._v(_vm._s(index))]
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    typeof color == "object"
-                      ? _vm._l(color, function(hex, intensity) {
-                          return _c(
-                            "div",
-                            {
-                              key: index + "-" + intensity,
-                              staticClass:
-                                "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
-                              on: {
-                                click: function($event) {
-                                  return _vm.setColor(hex)
-                                }
-                              }
-                            },
-                            [
-                              _c("div", {
-                                staticClass: "w-6 h-6 mx-1",
-                                staticStyle: { border: "1px solid #000" },
-                                style: "background-color:" + hex + ";"
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass: "text-center px-1",
-                                  staticStyle: {
-                                    "font-size": "0.75rem!important"
-                                  }
-                                },
-                                [_vm._v(_vm._s(index + "-" + intensity))]
-                              )
-                            ]
-                          )
-                        })
-                      : _vm._e()
-                  ]
-                })
-              ],
-              2
-            )
-          : _c(
-              "div",
-              { staticClass: "w-full flex flex-col items-center py-4" },
-              [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "h-8 w-8 text-red mb-1",
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      fill: "none",
-                      viewBox: "0 0 24 24",
-                      stroke: "currentColor",
-                      "aria-hidden": "true"
+        _c(
+          "div",
+          {
+            staticClass:
+              "absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll",
+            class: { hidden: !_vm.showColorMenu },
+            on: {
+              focusout: function($event) {
+                _vm.showColorMenu = false
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "flex flex-wrap py-2 w-full px-1" }, [
+              _c("p", { staticClass: "font-bold w-full mb-2" }, [
+                _vm._v("Color pack")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "inline-flex items-center" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectedGroup,
+                      expression: "selectedGroup"
                     }
+                  ],
+                  staticClass: "form-radio",
+                  attrs: {
+                    id: "radio-color-default",
+                    type: "radio",
+                    value: "default"
                   },
+                  domProps: { checked: _vm._q(_vm.selectedGroup, "default") },
+                  on: {
+                    click: function($event) {
+                      return _vm.switchColors("default")
+                    },
+                    change: function($event) {
+                      _vm.selectedGroup = "default"
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticStyle: { "margin-left": ".2rem" },
+                    attrs: { for: "radio-color-default" }
+                  },
+                  [_vm._v("Default")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pl-2 inline-flex items-center" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectedGroup,
+                      expression: "selectedGroup"
+                    }
+                  ],
+                  staticClass: "form-radio",
+                  attrs: {
+                    id: "radio-color-custom",
+                    type: "radio",
+                    value: "custom"
+                  },
+                  domProps: { checked: _vm._q(_vm.selectedGroup, "custom") },
+                  on: {
+                    click: function($event) {
+                      return _vm.switchColors("custom")
+                    },
+                    change: function($event) {
+                      _vm.selectedGroup = "custom"
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticStyle: { "margin-left": ".2rem" },
+                    attrs: { for: "radio-color-custom" }
+                  },
+                  [_vm._v("Custom")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.selectedGroup == "default"
+              ? _c(
+                  "div",
+                  { staticClass: "flex flex-wrap w-full" },
                   [
-                    _c("path", {
-                      attrs: {
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round",
-                        "stroke-width": "2",
-                        d:
-                          "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                      }
+                    _vm._l(_vm.availableColors, function(color, index) {
+                      return [
+                        typeof color == "string" &&
+                        index != "transparent" &&
+                        index != "current"
+                          ? _c(
+                              "div",
+                              {
+                                key: index,
+                                staticClass:
+                                  "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.setColor(color)
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", {
+                                  staticClass: "w-6 h-6 mx-1",
+                                  staticStyle: { border: "1px solid #000" },
+                                  style: "background-color:" + color + ";"
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass: "text-center",
+                                    staticStyle: {
+                                      "font-size": "0.75rem!important"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(index))]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        typeof color == "object"
+                          ? _vm._l(color, function(hex, intensity) {
+                              return _c(
+                                "div",
+                                {
+                                  key: index + "-" + intensity,
+                                  staticClass:
+                                    "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setColor(hex)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass: "w-6 h-6 mx-1",
+                                    staticStyle: { border: "1px solid #000" },
+                                    style: "background-color:" + hex + ";"
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "text-center px-1",
+                                      staticStyle: {
+                                        "font-size": "0.75rem!important"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(index + "-" + intensity))]
+                                  )
+                                ]
+                              )
+                            })
+                          : _vm._e()
+                      ]
                     })
+                  ],
+                  2
+                )
+              : _vm.availableCustomColors
+              ? _c(
+                  "div",
+                  { staticClass: "flex flex-wrap w-full" },
+                  [
+                    _vm._l(_vm.availableCustomColors, function(color, index) {
+                      return [
+                        typeof color == "string" &&
+                        index != "transparent" &&
+                        index != "current"
+                          ? _c(
+                              "div",
+                              {
+                                key: index,
+                                staticClass:
+                                  "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.setColor(color)
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", {
+                                  staticClass: "w-6 h-6 mx-1",
+                                  staticStyle: { border: "1px solid #000" },
+                                  style: "background-color:" + color + ";"
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass: "text-center",
+                                    staticStyle: {
+                                      "font-size": "0.75rem!important"
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(index))]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        typeof color == "object"
+                          ? _vm._l(color, function(hex, intensity) {
+                              return _c(
+                                "div",
+                                {
+                                  key: index + "-" + intensity,
+                                  staticClass:
+                                    "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setColor(hex)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass: "w-6 h-6 mx-1",
+                                    staticStyle: { border: "1px solid #000" },
+                                    style: "background-color:" + hex + ";"
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "text-center px-1",
+                                      staticStyle: {
+                                        "font-size": "0.75rem!important"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(index + "-" + intensity))]
+                                  )
+                                ]
+                              )
+                            })
+                          : _vm._e()
+                      ]
+                    })
+                  ],
+                  2
+                )
+              : _c(
+                  "div",
+                  { staticClass: "w-full flex flex-col items-center py-4" },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "h-8 w-8 text-red mb-1",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "none",
+                          viewBox: "0 0 24 24",
+                          stroke: "currentColor",
+                          "aria-hidden": "true"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round",
+                            "stroke-width": "2",
+                            d:
+                              "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("It appears there are no custom colors.")]),
+                    _vm._v(" "),
+                    _vm._m(0)
                   ]
-                ),
-                _vm._v(" "),
-                _c("p", [_vm._v("It appears there are no custom colors.")]),
-                _vm._v(" "),
-                _vm._m(0)
-              ]
-            )
-      ]
-    )
-  ])
+                )
+          ]
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -6601,9 +6612,9 @@ var TextColor = /*#__PURE__*/function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TextColorMenu_vue_vue_type_template_id_57133487___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextColorMenu.vue?vue&type=template&id=57133487& */ "./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&");
+/* harmony import */ var _TextColorMenu_vue_vue_type_template_id_57133487_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TextColorMenu.vue?vue&type=template&id=57133487&scoped=true& */ "./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&scoped=true&");
 /* harmony import */ var _TextColorMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TextColorMenu.vue?vue&type=script&lang=js& */ "./resources/js/TextColorMenu.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _TextColorMenu_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TextColorMenu.vue?vue&type=style&index=0&lang=css& */ "./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _TextColorMenu_vue_vue_type_style_index_0_id_57133487_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css& */ "./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -6615,11 +6626,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _TextColorMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TextColorMenu_vue_vue_type_template_id_57133487___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TextColorMenu_vue_vue_type_template_id_57133487___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TextColorMenu_vue_vue_type_template_id_57133487_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TextColorMenu_vue_vue_type_template_id_57133487_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "57133487",
   null
   
 )
@@ -6645,35 +6656,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************!*\
-  !*** ./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************/
+/***/ "./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css& ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/style-loader!../../node_modules/css-loader??ref--5-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/postcss-loader/src??ref--5-2!../../node_modules/vue-loader/lib??vue-loader-options!./TextColorMenu.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_id_57133487_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/style-loader!../../node_modules/css-loader??ref--5-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/postcss-loader/src??ref--5-2!../../node_modules/vue-loader/lib??vue-loader-options!./TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=style&index=0&id=57133487&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_id_57133487_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_id_57133487_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_id_57133487_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_style_index_0_id_57133487_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ "./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&":
-/*!***********************************************************************!*\
-  !*** ./resources/js/TextColorMenu.vue?vue&type=template&id=57133487& ***!
-  \***********************************************************************/
+/***/ "./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&scoped=true&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&scoped=true& ***!
+  \***********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_template_id_57133487___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./TextColorMenu.vue?vue&type=template&id=57133487& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_template_id_57133487___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_template_id_57133487_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./TextColorMenu.vue?vue&type=template&id=57133487&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_template_id_57133487_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_template_id_57133487___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TextColorMenu_vue_vue_type_template_id_57133487_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -6694,13 +6705,7 @@ __webpack_require__.r(__webpack_exports__);
 
 Statamic.booting(function () {
   var customColors = Statamic.$config.get('bard-custom-colors') || null;
-  var defaultColors = Statamic.$config.get('bard-default-colors') || null;
-  if (defaultColors && defaultColors.length === 0) {
-    defaultColors = null;
-  }
-
   window.bardCustomColors = customColors;
-  window.bardDefaultColors = defaultColors;
   Statamic.$bard.extend(function (_ref) {
     var mark = _ref.mark;
     return mark(new _TextColor__WEBPACK_IMPORTED_MODULE_0__["default"]());
@@ -6732,7 +6737,7 @@ Statamic.booting(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/bogdanmihai/vali/implant/packages/statamic-bard-text-color/resources/js/bard.js */"./resources/js/bard.js");
+module.exports = __webpack_require__(/*! /Users/bogdanmihai/vali/statamic/packages/statamic-bard-text-color/resources/js/bard.js */"./resources/js/bard.js");
 
 
 /***/ })

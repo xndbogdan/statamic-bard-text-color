@@ -1,7 +1,7 @@
 {
   "require": {
     "php": "^7.4 | ^8.0",
-    "statamic/cms": "^3.0.14"
+    "statamic/cms": "*"
   },
   "name": "xndbogdan/statamic-bard-text-color",
   "keywords": [
