@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block relative" v-if="enabled">
+  <div class="inline-block relative" v-if="enabled" v-click-outside="onClickOutside">
     <button
       class="bard-toolbar-button"
       :class="{
@@ -9,7 +9,7 @@
       v-tooltip="button.text"
       @click="showColorMenu = !showColorMenu"
     />
-    <div @focusout="showColorMenu = false" class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
+    <div class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
       <div class="flex flex-wrap py-2 w-full px-1">
         <p class="font-bold w-full mb-2">Color pack</p>
         <div class="inline-flex items-center">
@@ -64,6 +64,7 @@
   </div>
 </template>
 <script>
+import ClickOutside from 'vue-click-outside'
 const defaultTheme = require('tailwindcss/defaultTheme')
 export default {
   mixins: [ BardToolbarButton ],
@@ -78,7 +79,13 @@ export default {
       enabled: false,
     };
   },
+  directives: {
+    ClickOutside
+  },
   methods: {
+    onClickOutside() {
+      this.showColorMenu = false;
+    },
     setColor(color) {
       this.editor.commands.textColor({ color: color })
       this.showColorMenu = false

@@ -95,6 +95,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -160,6 +162,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 var defaultTheme = __webpack_require__(/*! tailwindcss/defaultTheme */ "./node_modules/tailwindcss/defaultTheme.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -175,7 +179,13 @@ var defaultTheme = __webpack_require__(/*! tailwindcss/defaultTheme */ "./node_m
       enabled: false
     };
   },
+  directives: {
+    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   methods: {
+    onClickOutside: function onClickOutside() {
+      this.showColorMenu = false;
+    },
     setColor: function setColor(color) {
       this.editor.commands.textColor({
         color: color
@@ -5975,6 +5985,87 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/vue-click-outside/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/vue-click-outside/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function validate(binding) {
+  if (typeof binding.value !== 'function') {
+    console.warn('[Vue-click-outside:] provided expression', binding.expression, 'is not a function.')
+    return false
+  }
+
+  return true
+}
+
+function isPopup(popupItem, elements) {
+  if (!popupItem || !elements)
+    return false
+
+  for (var i = 0, len = elements.length; i < len; i++) {
+    try {
+      if (popupItem.contains(elements[i])) {
+        return true
+      }
+      if (elements[i].contains(popupItem)) {
+        return false
+      }
+    } catch(e) {
+      return false
+    }
+  }
+
+  return false
+}
+
+function isServer(vNode) {
+  return typeof vNode.componentInstance !== 'undefined' && vNode.componentInstance.$isServer
+}
+
+exports = module.exports = {
+  bind: function (el, binding, vNode) {
+    if (!validate(binding)) return
+
+    // Define Handler and cache it on the element
+    function handler(e) {
+      if (!vNode.context) return
+
+      // some components may have related popup item, on which we shall prevent the click outside event handler.
+      var elements = e.path || (e.composedPath && e.composedPath())
+      elements && elements.length > 0 && elements.unshift(e.target)
+
+      if (el.contains(e.target) || isPopup(vNode.context.popupItem, elements)) return
+
+      el.__vueClickOutside__.callback(e)
+    }
+
+    // add Event Listeners
+    el.__vueClickOutside__ = {
+      handler: handler,
+      callback: binding.value
+    }
+    const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click';
+    !isServer(vNode) && document.addEventListener(clickHandler, handler)
+  },
+
+  update: function (el, binding) {
+    if (validate(binding)) el.__vueClickOutside__.callback = binding.value
+  },
+
+  unbind: function (el, binding, vNode) {
+    // Remove Event Listeners
+    const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click';
+    !isServer(vNode) && el.__vueClickOutside__ && document.removeEventListener(clickHandler, el.__vueClickOutside__.handler)
+    delete el.__vueClickOutside__
+  }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&scoped=true&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/TextColorMenu.vue?vue&type=template&id=57133487&scoped=true& ***!
@@ -5991,324 +6082,335 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.enabled
-    ? _c("div", { staticClass: "inline-block relative" }, [
-        _c("button", {
+    ? _c(
+        "div",
+        {
           directives: [
             {
-              name: "tooltip",
-              rawName: "v-tooltip",
-              value: _vm.button.text,
-              expression: "button.text"
+              name: "click-outside",
+              rawName: "v-click-outside",
+              value: _vm.onClickOutside,
+              expression: "onClickOutside"
             }
           ],
-          staticClass: "bard-toolbar-button",
-          class: {
-            active: _vm.showColorMenu
-          },
-          domProps: { innerHTML: _vm._s(_vm.button.html) },
-          on: {
-            click: function($event) {
-              _vm.showColorMenu = !_vm.showColorMenu
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll",
-            class: { hidden: !_vm.showColorMenu },
+          staticClass: "inline-block relative"
+        },
+        [
+          _c("button", {
+            directives: [
+              {
+                name: "tooltip",
+                rawName: "v-tooltip",
+                value: _vm.button.text,
+                expression: "button.text"
+              }
+            ],
+            staticClass: "bard-toolbar-button",
+            class: {
+              active: _vm.showColorMenu
+            },
+            domProps: { innerHTML: _vm._s(_vm.button.html) },
             on: {
-              focusout: function($event) {
-                _vm.showColorMenu = false
+              click: function($event) {
+                _vm.showColorMenu = !_vm.showColorMenu
               }
             }
-          },
-          [
-            _c("div", { staticClass: "flex flex-wrap py-2 w-full px-1" }, [
-              _c("p", { staticClass: "font-bold w-full mb-2" }, [
-                _vm._v("Color pack")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "inline-flex items-center" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selectedGroup,
-                      expression: "selectedGroup"
-                    }
-                  ],
-                  staticClass: "form-radio",
-                  attrs: {
-                    id: "radio-color-default",
-                    type: "radio",
-                    value: "default"
-                  },
-                  domProps: { checked: _vm._q(_vm.selectedGroup, "default") },
-                  on: {
-                    click: function($event) {
-                      return _vm.switchColors("default")
-                    },
-                    change: function($event) {
-                      _vm.selectedGroup = "default"
-                    }
-                  }
-                }),
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll",
+              class: { hidden: !_vm.showColorMenu }
+            },
+            [
+              _c("div", { staticClass: "flex flex-wrap py-2 w-full px-1" }, [
+                _c("p", { staticClass: "font-bold w-full mb-2" }, [
+                  _vm._v("Color pack")
+                ]),
                 _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticStyle: { "margin-left": ".2rem" },
-                    attrs: { for: "radio-color-default" }
-                  },
-                  [_vm._v("Default")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "pl-2 inline-flex items-center" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.selectedGroup,
-                      expression: "selectedGroup"
-                    }
-                  ],
-                  staticClass: "form-radio",
-                  attrs: {
-                    id: "radio-color-custom",
-                    type: "radio",
-                    value: "custom"
-                  },
-                  domProps: { checked: _vm._q(_vm.selectedGroup, "custom") },
-                  on: {
-                    click: function($event) {
-                      return _vm.switchColors("custom")
-                    },
-                    change: function($event) {
-                      _vm.selectedGroup = "custom"
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticStyle: { "margin-left": ".2rem" },
-                    attrs: { for: "radio-color-custom" }
-                  },
-                  [_vm._v("Custom")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _vm.selectedGroup == "default"
-              ? _c(
-                  "div",
-                  { staticClass: "flex flex-wrap w-full" },
-                  [
-                    _vm._l(_vm.availableColors, function(color, index) {
-                      return [
-                        typeof color == "string" &&
-                        index != "transparent" &&
-                        index != "current"
-                          ? _c(
-                              "div",
-                              {
-                                key: index,
-                                staticClass:
-                                  "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.setColor(color)
-                                  }
-                                }
-                              },
-                              [
-                                _c("div", {
-                                  staticClass: "w-6 h-6 mx-1",
-                                  staticStyle: { border: "1px solid #000" },
-                                  style: "background-color:" + color + ";"
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "p",
-                                  {
-                                    staticClass: "text-center",
-                                    staticStyle: {
-                                      "font-size": "0.75rem!important"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(index))]
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        typeof color == "object"
-                          ? _vm._l(color, function(hex, intensity) {
-                              return _c(
-                                "div",
-                                {
-                                  key: index + "-" + intensity,
-                                  staticClass:
-                                    "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.setColor(hex)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("div", {
-                                    staticClass: "w-6 h-6 mx-1",
-                                    staticStyle: { border: "1px solid #000" },
-                                    style: "background-color:" + hex + ";"
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "p",
-                                    {
-                                      staticClass: "text-center px-1",
-                                      staticStyle: {
-                                        "font-size": "0.75rem!important"
-                                      }
-                                    },
-                                    [_vm._v(_vm._s(index + "-" + intensity))]
-                                  )
-                                ]
-                              )
-                            })
-                          : _vm._e()
-                      ]
-                    })
-                  ],
-                  2
-                )
-              : _vm.availableCustomColors
-              ? _c(
-                  "div",
-                  { staticClass: "flex flex-wrap w-full" },
-                  [
-                    _vm._l(_vm.availableCustomColors, function(color, index) {
-                      return [
-                        typeof color == "string" &&
-                        index != "transparent" &&
-                        index != "current"
-                          ? _c(
-                              "div",
-                              {
-                                key: index,
-                                staticClass:
-                                  "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.setColor(color)
-                                  }
-                                }
-                              },
-                              [
-                                _c("div", {
-                                  staticClass: "w-6 h-6 mx-1",
-                                  staticStyle: { border: "1px solid #000" },
-                                  style: "background-color:" + color + ";"
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "p",
-                                  {
-                                    staticClass: "text-center",
-                                    staticStyle: {
-                                      "font-size": "0.75rem!important"
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(index))]
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        typeof color == "object"
-                          ? _vm._l(color, function(hex, intensity) {
-                              return _c(
-                                "div",
-                                {
-                                  key: index + "-" + intensity,
-                                  staticClass:
-                                    "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.setColor(hex)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("div", {
-                                    staticClass: "w-6 h-6 mx-1",
-                                    staticStyle: { border: "1px solid #000" },
-                                    style: "background-color:" + hex + ";"
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "p",
-                                    {
-                                      staticClass: "text-center px-1",
-                                      staticStyle: {
-                                        "font-size": "0.75rem!important"
-                                      }
-                                    },
-                                    [_vm._v(_vm._s(index + "-" + intensity))]
-                                  )
-                                ]
-                              )
-                            })
-                          : _vm._e()
-                      ]
-                    })
-                  ],
-                  2
-                )
-              : _c(
-                  "div",
-                  { staticClass: "w-full flex flex-col items-center py-4" },
-                  [
-                    _c(
-                      "svg",
+                _c("div", { staticClass: "inline-flex items-center" }, [
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "h-8 w-8 text-red mb-1",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          fill: "none",
-                          viewBox: "0 0 24 24",
-                          stroke: "currentColor",
-                          "aria-hidden": "true"
-                        }
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedGroup,
+                        expression: "selectedGroup"
+                      }
+                    ],
+                    staticClass: "form-radio",
+                    attrs: {
+                      id: "radio-color-default",
+                      type: "radio",
+                      value: "default"
+                    },
+                    domProps: { checked: _vm._q(_vm.selectedGroup, "default") },
+                    on: {
+                      click: function($event) {
+                        return _vm.switchColors("default")
                       },
-                      [
-                        _c("path", {
+                      change: function($event) {
+                        _vm.selectedGroup = "default"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticStyle: { "margin-left": ".2rem" },
+                      attrs: { for: "radio-color-default" }
+                    },
+                    [_vm._v("Default")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "pl-2 inline-flex items-center" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedGroup,
+                        expression: "selectedGroup"
+                      }
+                    ],
+                    staticClass: "form-radio",
+                    attrs: {
+                      id: "radio-color-custom",
+                      type: "radio",
+                      value: "custom"
+                    },
+                    domProps: { checked: _vm._q(_vm.selectedGroup, "custom") },
+                    on: {
+                      click: function($event) {
+                        return _vm.switchColors("custom")
+                      },
+                      change: function($event) {
+                        _vm.selectedGroup = "custom"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticStyle: { "margin-left": ".2rem" },
+                      attrs: { for: "radio-color-custom" }
+                    },
+                    [_vm._v("Custom")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.selectedGroup == "default"
+                ? _c(
+                    "div",
+                    { staticClass: "flex flex-wrap w-full" },
+                    [
+                      _vm._l(_vm.availableColors, function(color, index) {
+                        return [
+                          typeof color == "string" &&
+                          index != "transparent" &&
+                          index != "current"
+                            ? _c(
+                                "div",
+                                {
+                                  key: index,
+                                  staticClass:
+                                    "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setColor(color)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass: "w-6 h-6 mx-1",
+                                    staticStyle: { border: "1px solid #000" },
+                                    style: "background-color:" + color + ";"
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "text-center",
+                                      staticStyle: {
+                                        "font-size": "0.75rem!important"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(index))]
+                                  )
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          typeof color == "object"
+                            ? _vm._l(color, function(hex, intensity) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: index + "-" + intensity,
+                                    staticClass:
+                                      "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.setColor(hex)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("div", {
+                                      staticClass: "w-6 h-6 mx-1",
+                                      staticStyle: { border: "1px solid #000" },
+                                      style: "background-color:" + hex + ";"
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass: "text-center px-1",
+                                        staticStyle: {
+                                          "font-size": "0.75rem!important"
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(index + "-" + intensity))]
+                                    )
+                                  ]
+                                )
+                              })
+                            : _vm._e()
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                : _vm.availableCustomColors
+                ? _c(
+                    "div",
+                    { staticClass: "flex flex-wrap w-full" },
+                    [
+                      _vm._l(_vm.availableCustomColors, function(color, index) {
+                        return [
+                          typeof color == "string" &&
+                          index != "transparent" &&
+                          index != "current"
+                            ? _c(
+                                "div",
+                                {
+                                  key: index,
+                                  staticClass:
+                                    "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setColor(color)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass: "w-6 h-6 mx-1",
+                                    staticStyle: { border: "1px solid #000" },
+                                    style: "background-color:" + color + ";"
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "text-center",
+                                      staticStyle: {
+                                        "font-size": "0.75rem!important"
+                                      }
+                                    },
+                                    [_vm._v(_vm._s(index))]
+                                  )
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          typeof color == "object"
+                            ? _vm._l(color, function(hex, intensity) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: index + "-" + intensity,
+                                    staticClass:
+                                      "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.setColor(hex)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("div", {
+                                      staticClass: "w-6 h-6 mx-1",
+                                      staticStyle: { border: "1px solid #000" },
+                                      style: "background-color:" + hex + ";"
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass: "text-center px-1",
+                                        staticStyle: {
+                                          "font-size": "0.75rem!important"
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(index + "-" + intensity))]
+                                    )
+                                  ]
+                                )
+                              })
+                            : _vm._e()
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                : _c(
+                    "div",
+                    { staticClass: "w-full flex flex-col items-center py-4" },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "h-8 w-8 text-red mb-1",
                           attrs: {
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "2",
-                            d:
-                              "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                            xmlns: "http://www.w3.org/2000/svg",
+                            fill: "none",
+                            viewBox: "0 0 24 24",
+                            stroke: "currentColor",
+                            "aria-hidden": "true"
                           }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("It appears there are no custom colors.")]),
-                    _vm._v(" "),
-                    _vm._m(0)
-                  ]
-                )
-          ]
-        )
-      ])
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              "stroke-width": "2",
+                              d:
+                                "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v("It appears there are no custom colors.")
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ]
+                  )
+            ]
+          )
+        ]
+      )
     : _vm._e()
 }
 var staticRenderFns = [
