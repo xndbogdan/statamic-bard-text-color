@@ -1,7 +1,7 @@
 {
   "require": {
     "php": "^7.4 | ^8.0",
-    "statamic/cms": "*"
+    "statamic/cms": "dev-update-tiptap as 3.3.9999"
   },
   "name": "xndbogdan/statamic-bard-text-color",
   "keywords": [
