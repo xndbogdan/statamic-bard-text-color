@@ -24,12 +24,12 @@
 
       <div class="flex flex-wrap w-full" v-if="selectedGroup=='default'">
         <template v-for="(color, index) in availableColors" >
-          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
+          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
             <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
             <p class="text-center" style="font-size: 0.6rem!important;">{{ index }}</p>
           </div>
           <template v-if="typeof color == 'object'">
-            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
+            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
               <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
               <p class="text-center px-1" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
             </div>
@@ -39,12 +39,12 @@
 
       <div class="flex flex-wrap w-full" v-else-if="availableCustomColors">
         <template v-for="(color, index) in availableCustomColors" >
-          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
+          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
             <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
             <p class="text-center" style="font-size: 0.6rem!important;">{{ index }}</p>
           </div>
           <template v-if="typeof color == 'object'">
-            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
+            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
               <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
               <p class="text-center px-1" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
             </div>

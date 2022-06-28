@@ -1566,7 +1566,7 @@ var render = function () {
                                 {
                                   key: index,
                                   staticClass:
-                                    "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                    "py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
                                   on: {
                                     click: function ($event) {
                                       return _vm.setColor(color)
@@ -1601,7 +1601,7 @@ var render = function () {
                                   {
                                     key: index + "-" + intensity,
                                     staticClass:
-                                      "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                      "py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
                                     on: {
                                       click: function ($event) {
                                         return _vm.setColor(hex)
@@ -1651,7 +1651,7 @@ var render = function () {
                                   {
                                     key: index,
                                     staticClass:
-                                      "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                      "py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
                                     on: {
                                       click: function ($event) {
                                         return _vm.setColor(color)
@@ -1686,7 +1686,7 @@ var render = function () {
                                     {
                                       key: index + "-" + intensity,
                                       staticClass:
-                                        "py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
+                                        "py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1",
                                       on: {
                                         click: function ($event) {
                                           return _vm.setColor(hex)
