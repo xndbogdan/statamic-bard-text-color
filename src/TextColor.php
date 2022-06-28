@@ -3,24 +3,28 @@
 namespace XndBogdan\BardTextColor;
 
 use Tiptap\Core\Mark;
+use Tiptap\Utils\HTML;
 
 class TextColor extends Mark
 {
-    protected $markType = 'textColor';
-    protected $tagName = 'span';
+    public static $name = "textColor";
 
-    public function matching(): bool {
-        return $this->mark->type === $this->markType;
+    public function renderHTML($mark, $HTMLAttributes = [])
+    {
+        return [
+            'span',
+            HTML::mergeAttributes(
+                [
+                    'class' => 'text-color',
+                    'style' => $this->getTextColor($mark->attrs->key),
+                ],
+            ),
+            0
+        ];
     }
 
-    public function tag(): ?array {
-        return [
-            [
-                'tag' => 'span',
-                'attrs' => [
-                    'style' => "color:{$this->mark->attrs->color}!important;",
-                ],
-            ],
-        ];
+    private function getTextColor($color): string
+    {
+        return "color: $color";
     }
 }

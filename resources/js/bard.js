@@ -1,21 +1,19 @@
-import TextColor from "./TextColor";
+import { TextColor } from "./TextColor";
 import TextColorMenu from "./TextColorMenu";
 
 Statamic.booting(() => {
   const customColors = Statamic.$config.get('bard-custom-colors') || null;
   window.bardCustomColors = customColors
 
-  Statamic.$bard.extend(({ mark }) => mark(new TextColor()));
-  Statamic.$bard.buttons((buttons) => {
-    const indexOfBold = _.findIndex(buttons, { command: "bold" });
-
-    buttons.splice(indexOfBold, 0, {
+  Statamic.$bard.addExtension(() => TextColor)
+  Statamic.$bard.buttons(() => {
+    return {
       name: "color",
       text: "Text Color",
-      command: "textColor",
+      command: (editor) => editor.commands.changeTextColor(),
       args: { color: "#fff" },
       icon: "paint-brush",
       component: TextColorMenu,
-    })
+    }
   })
 })

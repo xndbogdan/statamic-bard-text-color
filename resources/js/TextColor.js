@@ -1,46 +1,57 @@
+const { Mark } = Statamic.$bard.tiptap.core;
 const { core: commands } = Statamic.$bard.tiptap;
 const { markInputRule } = commands;
 
-export default class TextColor {
-  name() {
-    return "textColor";
-  }
+export const TextColor = Mark.create ({
+  name: 'textColor',
 
-  schema() {
+  addAttributes() {
     return {
-      attrs: {
-        color: {
-          default: "#000",
-        },
+      key: {
+        default: '',
+        parseHTML: element => { element.querySelector('span.text-color')?.getAttribute('data-class') },
+      }
+    }
+  },
+
+  parseHtml() {
+    return [
+      {
+        tag: 'span.text-color'
+      }
+    ]
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    let style = 'color: ';
+    style += HTMLAttributes.key
+    
+    return [
+      'span',
+      {
+        ...HTMLAttributes,
+        class: 'text-color',
+        'data-class': HTMLAttributes.key,
+        'style': style
       },
-      parseDOM: [
-        {
-          style: "color",
-          getAttrs: (value) => ({ color: value }),
-        },
-      ],
-      toDOM: (mark) => [
-        "span",
-        { style: `color: ${mark.attrs.color}!important;` },
-        0,
-      ],
-    };
+      0
+    ]
+  },
+
+  addCommands() {
+    return {
+      changeTextColor: attributes => ({ chain }) => {
+          if (attributes.key) {
+            return chain()
+              .setMark(this.name, attributes)
+              .run()
+          }
+
+          return chain()
+            .unsetMark(this.name, { extendEmptyMarkRange: true })
+            .run()
+      },
+    }
   }
 
-  commands({ type, updateMark }) {
-    return (attrs) => updateMark(type, attrs);
-  }
-
-  inputRules({ type }) {
-    return [markInputRule(/(?:\*\*|__)([^*_]+)(?:\*\*|__)$/, type)];
-  }
-
-  pasteRules({ type }) {
-    return [];
-  }
-
-  plugins() {
-    return [];
-  }
-
-}
+})
