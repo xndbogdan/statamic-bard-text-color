@@ -1,16 +1,9 @@
 module.exports = {
-  mode: 'jit',
-  purge: {
-      content: [
-          './resources/**/*.vue'
-      ],
-      options: {
-      },
-  },
-  important: true,
+  content: [
+    './resources/**/*.{vue,js,ts,jsx,tsx}',
+  ],
   theme: {
       extend: {},
   },
-  variants: {},
   plugins: [],
 }

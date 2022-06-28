@@ -9,7 +9,7 @@
       v-tooltip="button.text"
       @click="showColorMenu = !showColorMenu"
     />
-    <div class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
+    <div class="absolute left-0 bg-white border border-gray-200 px-1 mt-sm rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
       <div class="flex flex-wrap py-2 w-full px-1">
         <p class="font-bold w-full mb-2">Color pack</p>
         <div class="inline-flex items-center">
@@ -26,12 +26,12 @@
         <template v-for="(color, index) in availableColors" >
           <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
             <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
-            <p class="text-center" style="font-size: 0.65rem!important;">{{ index }}</p>
+            <p class="text-center" style="font-size: 0.6rem!important;">{{ index }}</p>
           </div>
           <template v-if="typeof color == 'object'">
             <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
               <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
-              <p class="text-center px-1" style="font-size: 0.75rem!important;">{{ index + '-' + intensity }}</p>
+              <p class="text-center px-1" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
             </div>
           </template>
         </template>
@@ -41,12 +41,12 @@
         <template v-for="(color, index) in availableCustomColors" >
           <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
             <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
-            <p class="text-center" style="font-size: 0.75rem!important;">{{ index }}</p>
+            <p class="text-center" style="font-size: 0.6rem!important;">{{ index }}</p>
           </div>
           <template v-if="typeof color == 'object'">
             <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
               <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
-              <p class="text-center px-1" style="font-size: 0.65rem!important;">{{ index + '-' + intensity }}</p>
+              <p class="text-center px-1" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
             </div>
           </template>
         </template>
@@ -124,6 +124,12 @@ export default {
 };
 </script>
 <style scoped>
+  .border {
+    border-width: 1px;
+  }
+  .left-10 {
+    left: 2.5rem;
+  }
   .overflow-y-scroll {
     overflow-y: scroll;
   }
@@ -132,6 +138,12 @@ export default {
   }
   .max-h-320px {
     max-height: 300px;
+  }
+  .mt-sm {
+    margin-top: 0.15rem;
+  }
+  .mt-1 {
+    margin-top: 0.25rem;
   }
   .px-1 {
     padding-left: 0.25rem;
@@ -179,6 +191,12 @@ export default {
   }
   .bg-gray-200 {
     background-color: rgba(229, 231, 235, 1);
+  }
+  .border-gray-200 {
+    border-color: solid rgba(249, 250, 251, 1);
+  }
+  .bg-white {
+    background-color: rgba(255, 255, 255, 1);
   }
   .flex {
     display: flex;
