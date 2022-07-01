@@ -19,7 +19,7 @@ class ServiceProvider extends AddonServiceProvider
             __DIR__.'/../config/bard-custom-colors.php' => config_path('bard-custom-colors.php'),
         ], 'bard-custom-colors');
 
-        Augmentor::addMark(TextColor::class);
+        Augmentor::addExtension('text-color', new TextColor());
         Statamic::provideToScript([
             'bard-custom-colors' => config('bard-custom-colors.custom_colors', config('bard-custom-colors')),
             'bard-default-colors' => config('bard-custom-colors.default_colors'),

@@ -1,8 +1,9 @@
-  // tailwind.config.js
 module.exports = {
-  plugins: [
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography')
-  ]
+  content: [
+    './resources/**/*.{vue,js,ts,jsx,tsx}',
+  ],
+  theme: {
+      extend: {},
+  },
+  plugins: [],
 }

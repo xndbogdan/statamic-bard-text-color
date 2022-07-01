@@ -1,9 +1,9 @@
 {
   "require": {
-    "php": "^7.4 | ^8.0",
-    "statamic/cms": "^3.0.14"
+    "statamic/cms": "^3.3.0"
   },
   "name": "xndbogdan/statamic-bard-text-color",
+  "license": "MIT",
   "keywords": [
     "statamic",
     "bard",
