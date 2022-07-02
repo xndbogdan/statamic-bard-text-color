@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block relative">
+  <div class="inline-block relative" v-if="enabled" v-click-outside="onClickOutside">
     <button
       class="bard-toolbar-button"
       :class="{
@@ -7,11 +7,17 @@
       }"
       v-html="button.html"
       v-tooltip="button.text"
-      @click="showColorMenu = !showColorMenu"
+      @click="toggleColorMenu"
     />
-    <div class="absolute left-10 bg-gray-200 px-1 rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
-      <div class="flex flex-wrap py-2 w-full px-1">
-        <p class="font-bold w-full mb-2">Color pack</p>
+    <div class="absolute left-0 bg-white border border-gray-200 px-2 mt-sm rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
+      <div class="flex flex-wrap pt-2 w-full">
+        <p class="font-bold w-full mb-2">Filters</p>
+        
+        <div class="inline-flex items-center">
+          <input id="color-filter" class="border shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1 pl-2 block w-full sm:text-sm border-gray-300 rounded-md" type="text" v-model="filter" placeholder="Color name">
+        </div>
+      </div>
+      <div class="flex flex-wrap pt-2 w-full mb-2">
         <div class="inline-flex items-center">
             <input id="radio-color-default" class="form-radio" type="radio" v-model="selectedGroup" value="default" @click="switchColors('default')">
             <label for="radio-color-default" style="margin-left: .2rem;">Default</label>
@@ -21,32 +27,33 @@
             <label for="radio-color-custom" style="margin-left: .2rem;">Custom</label>
         </div>
       </div>
+     
 
       <div class="flex flex-wrap w-full" v-if="selectedGroup=='default'">
-        <template v-for="(color, index) in availableColors" >
-          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
+        <template v-for="(color, index) in filteredColors" >
+          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
             <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
-            <p class="text-center" style="font-size: 0.75rem!important;">{{ index }}</p>
+            <p class="text-center" style="font-size: 0.6rem!important;">{{ index }}</p>
           </div>
           <template v-if="typeof color == 'object'">
-            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
+            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
               <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
-              <p class="text-center px-1" style="font-size: 0.75rem!important;">{{ index + '-' + intensity }}</p>
+              <p class="text-center px-1" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
             </div>
           </template>
         </template>
       </div>
 
       <div class="flex flex-wrap w-full" v-else-if="availableCustomColors">
-        <template v-for="(color, index) in availableCustomColors" >
-          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
+        <template v-for="(color, index) in filteredColors" >
+          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
             <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
-            <p class="text-center" style="font-size: 0.75rem!important;">{{ index }}</p>
+            <p class="text-center" style="font-size: 0.6rem!important;">{{ index }}</p>
           </div>
           <template v-if="typeof color == 'object'">
-            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
+            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
               <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
-              <p class="text-center px-1" style="font-size: 0.75rem!important;">{{ index + '-' + intensity }}</p>
+              <p class="text-center px-1" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
             </div>
           </template>
         </template>
@@ -64,23 +71,42 @@
   </div>
 </template>
 <script>
-const defaultTheme = require('tailwindcss/defaultTheme')
+import ClickOutside from 'vue-click-outside'
+import colors from 'tailwindcss/colors'
+
 export default {
   mixins: [ BardToolbarButton ],
   data() {
     return {
       showColorMenu: false,
-      availableColors: defaultTheme.colors,
+      availableColors: colors,
       availableCustomColors: null,
-      selectedColors: defaultTheme.colors,
+      selectedColors: colors,
       selectedGroup: 'default',
-      getMarkAttrs: this.editor.getMarkAttrs.bind(this.editor),
+      // getMarkAttrs: this.editor.getMarkAttrs.bind(this.editor),
+      enabled: false,
+      filter: '',
     };
   },
+  directives: {
+    ClickOutside
+  },
   methods: {
+    onClickOutside() {
+      this.showColorMenu = false;
+      this.filter = ''
+    },
+    toggleColorMenu() {
+      this.showColorMenu = !this.showColorMenu;
+      this.filter = ''
+    },
     setColor(color) {
-      this.editor.commands.textColor({ color: color })
-      this.showColorMenu = false
+      // this.filter = ''
+      this.editor.commands.changeTextColor({ 
+        key: color === this.currentKey ? false : color,
+        color: color 
+      })
+      // this.showColorMenu = false
     },
     switchColors(group) {
       switch(group) {
@@ -95,14 +121,65 @@ export default {
       }
     }
   },
+  computed: {
+    currentKey() {
+      return this.editor.getAttributes('textColor').key;
+    },
+    filteredColors() {
+      let filteredObject = null
+      if(this.selectedGroup !== 'default' && !this.availableCustomColors) {
+        return null
+      }
+      
+      if(this.selectedGroup === 'default') {
+        filteredObject = this.availableColors
+      } else {
+        filteredObject = this.availableCustomColors
+      }
+
+      if(!this.filter) {
+        return filteredObject
+      }
+
+      const finalFilteredObject = {}
+
+      Object.entries(filteredObject).forEach(([key, value]) => {
+        if(key.toLowerCase().includes(this.filter.toLowerCase())) {
+          finalFilteredObject[key] = value
+        }
+      })
+
+      return finalFilteredObject
+    }
+  },
   mounted() {
-      this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null
+    this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null
+    // check if bard button is enabled
+    if(this.config && this.config.buttons.includes('color')) {
+      this.enabled = true
+    }
   },
   created() {
   }
 };
 </script>
-<style>
+<style scoped>
+  .shadow-sm {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  .focus\:ring-indigo-500:focus {
+    box-shadow: 0 0 0 1px #6366f1;
+  }
+  .block {
+    display: block;
+  }
+
+  .border {
+    border-width: 1px;
+  }
+  .left-10 {
+    left: 2.5rem;
+  }
   .overflow-y-scroll {
     overflow-y: scroll;
   }
@@ -111,6 +188,12 @@ export default {
   }
   .max-h-320px {
     max-height: 300px;
+  }
+  .mt-sm {
+    margin-top: 0.15rem;
+  }
+  .mt-1 {
+    margin-top: 0.25rem;
   }
   .px-1 {
     padding-left: 0.25rem;
@@ -150,6 +233,9 @@ export default {
     margin-top:.25rem;
     margin-bottom:.25rem;
   }
+  .rounded-md {
+    border-radius: 0.375rem;
+  }
   .rounded-xl {
     border-radius: 0.75rem;
   }
@@ -158,6 +244,15 @@ export default {
   }
   .bg-gray-200 {
     background-color: rgba(229, 231, 235, 1);
+  }
+  .border-gray-200 {
+    border-color: solid rgba(249, 250, 251, 1);
+  }
+  .border-gray-300 {
+    border-color: solid rgba(229, 231, 235, 1);
+  }
+  .bg-white {
+    background-color: rgba(255, 255, 255, 1);
   }
   .flex {
     display: flex;
@@ -202,8 +297,20 @@ export default {
     .min-w-500 {
       min-width:500px;
     }
+    .pl-2 {
+      padding-left: 0.5rem;
+    }
+    .pl-0 {
+      padding-left: 0;
+    }
+    .mt-2 {
+      margin-top: 0.5rem;
+    }
+    .mt-0 {
+      margin-top: 0;
+    }
   }
-  @media (min-width: 640px) {
+  @media screen and (min-width: 640px) and (max-width: 768px) {
     .sm\:text-xl {
       font-size: 1.25rem;
       line-height: 1.75rem;
@@ -217,6 +324,22 @@ export default {
     .sm\:w-1\/2 {
       width: 50%;
     }
+    .sm\:pl-2 {
+      padding-left: 0.5rem;
+    }
+    .sm\:pl-0 {
+      padding-left: 0;
+    }
+    .sm\:mt-2 {
+      margin-top: 0.5rem;
+    }
+    .sm\:mt-0 {
+      margin-top: 0;
+    }
+    .sm\:text-sm {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
   }
   @media (min-width: 768px) {
     .md\:w-full {
@@ -227,6 +350,18 @@ export default {
     }
     .md\:w-1\/2 {
       width: 50%;
+    }
+    .md\:pl-2 {
+      padding-left: 0.5rem;
+    }
+    .md\:pl-0 {
+      padding-left: 0;
+    }
+    .md\:mt-2 {
+      margin-top: 0.5rem;
+    }
+    .md\:mt-0 {
+      margin-top: 0;
     }
   }
   @media (min-width: 1280px) {
@@ -244,6 +379,18 @@ export default {
     }
     .lg\:min-w-500 {
       min-width:500px;
+    }
+    .lg\:pl-2 {
+      padding-left: 0.5rem;
+    }
+    .lg\:pl-0 {
+      padding-left: 0;
+    }
+    .lg\:mt-2 {
+      margin-top: 0.5rem;
+    }
+    .lg\:mt-0 {
+      margin-top: 0;
     }
   }
 </style>
