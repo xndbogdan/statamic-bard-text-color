@@ -153,11 +153,11 @@ export default {
     }
   },
   mounted() {
-    this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null
-    // check if bard button is enabled
-    if(this.config && this.config.buttons.includes('color')) {
-      this.enabled = true
-    }
+      this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null
+      this.availableColors = window.bardDefaultColors ? window.bardDefaultColors : null
+      if(this.config && this.config.buttons.includes('color')) {
+        this.enabled = true
+      }
   },
   created() {
   }
