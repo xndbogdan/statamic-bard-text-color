@@ -105,6 +105,7 @@ export default {
   },
   mounted() {
       this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null
+      this.availableColors = window.bardDefaultColors ? window.bardDefaultColors : null
       if(this.config && this.config.buttons.includes('color')) {
         this.enabled = true
       }

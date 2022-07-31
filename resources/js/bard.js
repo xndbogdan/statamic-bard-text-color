@@ -2,8 +2,8 @@ import TextColor from "./TextColor";
 import TextColorMenu from "./TextColorMenu";
 
 Statamic.booting(() => {
-  const customColors = Statamic.$config.get('bard-custom-colors') || null;
-  window.bardCustomColors = customColors
+  window.bardCustomColors = Statamic.$config.get('bard-custom-colors') || null;
+  window.bardDefaultColors = Statamic.$config.get('bard-default-colors') || null;
 
   Statamic.$bard.extend(({ mark }) => mark(new TextColor()));
   Statamic.$bard.buttons((buttons) => {
