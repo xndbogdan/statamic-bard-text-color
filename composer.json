@@ -4,6 +4,7 @@
     "statamic/cms": "^3.0.14"
   },
   "name": "xndbogdan/statamic-bard-text-color",
+  "license": "MIT",
   "keywords": [
     "statamic",
     "bard",
