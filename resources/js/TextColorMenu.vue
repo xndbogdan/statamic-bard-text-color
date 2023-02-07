@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block relative" v-if="enabled" v-click-outside="onClickOutside">
+  <div class="relative inline-block" v-if="enabled" v-click-outside="onClickOutside">
     <button
       class="bard-toolbar-button"
       :class="{
@@ -9,20 +9,20 @@
       v-tooltip="button.text"
       @click="toggleColorMenu"
     />
-    <div class="absolute left-0 bg-white border border-gray-200 px-2 mt-sm rounded-sm flex flex-wrap min-w-250 lg:min-w-500 z-10 max-h-300px overflow-y-scroll" :class="{ hidden: !showColorMenu }">
-      <div class="flex flex-wrap pt-2 w-full">
-        <p class="font-bold w-full mb-2">Filters</p>
+    <div class="absolute left-0 z-10 flex flex-wrap px-2 overflow-y-scroll bg-white border border-gray-200 rounded-sm mt-sm min-w-250 lg:min-w-500 max-h-300px" :class="{ hidden: !showColorMenu }">
+      <div class="flex flex-wrap w-full pt-2">
+        <p class="w-full mb-2 font-bold">Filters</p>
         
         <div class="inline-flex items-center">
-          <input id="color-filter" class="border shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-1 pl-2 block w-full sm:text-sm border-gray-300 rounded-md" type="text" v-model="filter" placeholder="Color name">
+          <input id="color-filter" class="block w-full py-1 pl-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="text" v-model="filter" placeholder="Color name">
         </div>
       </div>
-      <div class="flex flex-wrap pt-2 w-full mb-2">
+      <div class="flex flex-wrap w-full pt-2 mb-2">
         <div class="inline-flex items-center">
             <input id="radio-color-default" class="form-radio" type="radio" v-model="selectedGroup" value="default" @click="switchColors('default')">
             <label for="radio-color-default" style="margin-left: .2rem;">Default</label>
         </div>
-        <div class="pl-2 inline-flex items-center">
+        <div class="inline-flex items-center pl-2">
             <input id="radio-color-custom" class="form-radio" type="radio" v-model="selectedGroup" value="custom" @click="switchColors('custom')">
             <label for="radio-color-custom" style="margin-left: .2rem;">Custom</label>
         </div>
@@ -31,14 +31,14 @@
 
       <div class="flex flex-wrap w-full" v-if="selectedGroup=='default'">
         <template v-for="(color, index) in filteredColors" >
-          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
+          <div @click="setColor(color)" :key="index" class="flex flex-row items-center justify-start w-full py-1 my-1 rounded-sm cursor-pointer hover:bg-gray-300 sm:w-1/2 xl:w-1/4" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
             <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
             <p class="text-center" style="font-size: 0.6rem!important;">{{ index }}</p>
           </div>
           <template v-if="typeof color == 'object'">
-            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
+            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="flex flex-row items-center justify-start w-full py-1 my-1 rounded-sm cursor-pointer hover:bg-gray-300 sm:w-1/2 xl:w-1/4">
               <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
-              <p class="text-center px-1" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
+              <p class="px-1 text-center" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
             </div>
           </template>
         </template>
@@ -46,27 +46,26 @@
 
       <div class="flex flex-wrap w-full" v-else-if="availableCustomColors">
         <template v-for="(color, index) in filteredColors" >
-          <div @click="setColor(color)" :key="index" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
+          <div @click="setColor(color)" :key="index" class="flex flex-row items-center justify-start w-full py-1 my-1 rounded-sm cursor-pointer hover:bg-gray-300 sm:w-1/2 xl:w-1/4" v-if="typeof color == 'string' && index != 'transparent' && index !='current'">
             <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+color+';'"></div>
             <p class="text-center" style="font-size: 0.6rem!important;">{{ index }}</p>
           </div>
           <template v-if="typeof color == 'object'">
-            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="py-1 hover:bg-gray-300 rounded-sm w-full sm:w-1/2 xl:w-1/4 flex flex-row justify-start cursor-pointer items-center my-1">
+            <div v-for="(hex, intensity) in color" :key="index + '-' + intensity" @click="setColor(hex)" class="flex flex-row items-center justify-start w-full py-1 my-1 rounded-sm cursor-pointer hover:bg-gray-300 sm:w-1/2 xl:w-1/4">
               <div class="w-6 h-6 mx-1" style="border: 1px solid #000;" :style="'background-color:'+hex+';'"></div>
-              <p class="text-center px-1" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
+              <p class="px-1 text-center" style="font-size: 0.6rem!important;">{{ index + '-' + intensity }}</p>
             </div>
           </template>
         </template>
       </div>
 
-      <div class="w-full flex flex-col items-center py-4" v-else>
-          <svg class="h-8 w-8 text-red mb-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <div class="flex flex-col items-center w-full py-4" v-else>
+          <svg class="w-8 h-8 mb-1 text-red" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
           <p>It appears there are no custom colors.</p>
           <p>Please check the <a class="text-blue-600" href="https://github.com/xndbogdan/statamic-bard-text-color/blob/main/README.md#custom-colors">documentation</a> on how to configure them.</p>
       </div>
-
     </div>
   </div>
 </template>
@@ -154,7 +153,7 @@ export default {
   },
   mounted() {
       this.availableCustomColors = window.bardCustomColors ? window.bardCustomColors : null
-      this.availableColors = window.bardDefaultColors ? window.bardDefaultColors : null
+      this.availableColors = window.bardDefaultColors ? window.bardDefaultColors : colors
       if(this.config && this.config.buttons.includes('color')) {
         this.enabled = true
       }
