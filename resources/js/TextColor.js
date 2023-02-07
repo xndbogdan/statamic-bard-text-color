@@ -1,6 +1,15 @@
 const { Mark } = Statamic.$bard.tiptap.core;
 
 export function isCloseToWhite(color) {
+
+  if(color === 'transparent') {
+    return true;
+  }
+
+  if(color === 'inherit') {
+    return false;
+  }
+
   let r, g, b;
 
   if (color.startsWith('#') && color.length === 7) {
