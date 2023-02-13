@@ -11,12 +11,14 @@ class TextColor extends Mark
 
     public function renderHTML($mark, $HTMLAttributes = [])
     {
+        $attrKey = $mark->attrs->key ?? null;
+
         return [
             'span',
             HTML::mergeAttributes(
                 [
                     'class' => 'text-color',
-                    'style' => $this->getTextColor($mark->attrs->key),
+                    'style' => $this->getTextColor($attrKey),
                 ],
             ),
             0
@@ -25,6 +27,9 @@ class TextColor extends Mark
 
     private function getTextColor($color): string
     {
+        if (!$color) {
+            return '';
+        }
         return "color: $color";
     }
 }
