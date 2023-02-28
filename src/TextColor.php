@@ -11,7 +11,7 @@ class TextColor extends Mark
 
     public function renderHTML($mark, $HTMLAttributes = [])
     {
-        $color = $mark->attrs->color ?? $mark->attrs->key ?? null;
+        $color = $mark->attrs->color ?? null;
 
         return [
             'span',

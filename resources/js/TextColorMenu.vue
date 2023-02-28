@@ -101,9 +101,8 @@ export default {
     },
     setColor(color) {
       // this.filter = ''
-      this.editor.commands.changeTextColor({ 
-        key: color === this.currentKey ? false : color,
-        color: color 
+      this.editor.commands.changeTextColor({
+        color: color === this.currentColor ? false : color,
       })
       // this.showColorMenu = false
     },
@@ -121,8 +120,8 @@ export default {
     }
   },
   computed: {
-    currentKey() {
-      return this.editor.getAttributes('textColor').key;
+    currentColor() {
+      return this.editor.getAttributes('textColor').color;
     },
     filteredColors() {
       let filteredObject = null
