@@ -58,7 +58,7 @@ export const TextColor = Mark.create ({
   },
 
   renderHTML({ HTMLAttributes }) {
-    let style = `color: ${HTMLAttributes.color}`;
+    let style = `color: ${HTMLAttributes.color};`;
 
     if (isCloseToWhite(HTMLAttributes.color)) {
       style += 'text-shadow: 1px 2px #333;';
