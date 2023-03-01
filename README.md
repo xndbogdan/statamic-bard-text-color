@@ -35,6 +35,7 @@ I'm planning to release a package that automatically exports your config when bu
 Big thanks to:
 - [Craig Anderson](https://github.com/intrepidws) for participating in active development.
 - [Lars Heidkämper](https://github.com/heidkaemper) for participating in active development.
+- [Bernhard Berger](https://github.com/bernhardberger) for participating in active development.
 - [Hesesses](https://github.com/Hesesses) for suggesting a custom color implementation.
 - [ncla](https://github.com/ncla) for showing a working example in a project implementation.
 - [Jelle Roorda](https://github.com/jelleroorda) from the Statamic discord, for providing resources & advice on how to sucessfuly implement the feature.
