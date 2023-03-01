@@ -6,7 +6,7 @@ export function isCloseToWhite(color) {
     return true;
   }
 
-  if(color === 'inherit') {
+  if(color === 'inherit' || color === '') {
     return false;
   }
 
@@ -33,6 +33,7 @@ export function isCloseToWhite(color) {
   } else {
     throw new Error(`Invalid color format: ${color}`);
   }
+
   return r >= 175 && g >= 175 && b >= 175;
 }
 
@@ -41,7 +42,7 @@ export const TextColor = Mark.create ({
 
   addAttributes() {
     return {
-      key: {
+      color: {
         default: '',
         parseHTML: element => { element.querySelector('span.text-color')?.getAttribute('data-class') },
       }
@@ -57,11 +58,10 @@ export const TextColor = Mark.create ({
   },
 
   renderHTML({ HTMLAttributes }) {
-    let style = 'color: ';
-    style += HTMLAttributes.key
+    let style = `color: ${HTMLAttributes.color};`;
 
-    if (isCloseToWhite(HTMLAttributes.key)) {
-      style += '; text-shadow: 1px 2px #333';
+    if (isCloseToWhite(HTMLAttributes.color)) {
+      style += 'text-shadow: 1px 2px #333;';
     }
     
     return [
@@ -69,7 +69,7 @@ export const TextColor = Mark.create ({
       {
         ...HTMLAttributes,
         class: 'text-color',
-        'data-class': HTMLAttributes.key,
+        'data-class': HTMLAttributes.color,
         'style': style
       },
       0
@@ -79,7 +79,7 @@ export const TextColor = Mark.create ({
   addCommands() {
     return {
       changeTextColor: attributes => ({ chain }) => {
-          if (attributes.key) {
+          if (attributes.color) {
             return chain()
               .setMark(this.name, attributes)
               .run()
