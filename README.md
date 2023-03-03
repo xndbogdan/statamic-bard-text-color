@@ -1,7 +1,6 @@
 
 # Statamic Bard Text Color Extension
 
-<a href="https://www.buymeacoffee.com/xndbogdan"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=xndbogdan&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"></a>
 ![Statamic 3.0+](https://img.shields.io/badge/Statamic-3.0+-FF269E?style=for-the-badge&link=https://statamic.com)
 [![Total Downloads](https://img.shields.io/packagist/dt/xndbogdan/statamic-bard-text-color.svg)](https://packagist.org/packages/xndbogdan/statamic-bard-text-color)
 
