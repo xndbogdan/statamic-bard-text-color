@@ -6,7 +6,7 @@ export function isCloseToWhite(color) {
     return true;
   }
 
-  if(color === 'inherit' || color === '') {
+  if(color === 'inherit' || color === '' || color.startsWith('var(')) {
     return false;
   }
 
