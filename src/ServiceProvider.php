@@ -12,6 +12,11 @@ class ServiceProvider extends AddonServiceProvider
         __DIR__.'/../dist/js/textcolor.js',
     ];
 
+    public function register()
+    {
+        $this->app->bind(\Statamic\Fieldtypes\Bard::class, Bard::class);
+    }
+
     public function boot() {
         parent::boot();
 
