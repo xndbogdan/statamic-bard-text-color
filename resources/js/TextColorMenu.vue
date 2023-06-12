@@ -13,18 +13,18 @@
       <div class="flex flex-wrap w-full pt-2">
         <p class="w-full mb-2 font-bold">Filters</p>
         
-        <div class="inline-flex items-center">
+        <div class="inline-flex items-center w-full">
           <input id="color-filter" class="block w-full py-1 pl-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" type="text" v-model="filter" placeholder="Color name">
         </div>
       </div>
-      <div class="flex flex-wrap w-full pt-2 mb-2">
+      <div class="flex flex-col w-full pt-2 mb-2">
         <div class="inline-flex items-center">
-            <input id="radio-color-default" class="form-radio" type="radio" v-model="selectedGroup" value="default" @click="switchColors('default')">
-            <label for="radio-color-default" style="margin-left: .2rem;">Default</label>
+            <input id="radio-color-default" class="inline form-radio" type="radio" v-model="selectedGroup" value="default" @click="switchColors('default')">
+            <label for="radio-color-default" class="inline" style="margin-left: .2rem;">Default</label>
         </div>
-        <div class="inline-flex items-center pl-2">
-            <input id="radio-color-custom" class="form-radio" type="radio" v-model="selectedGroup" value="custom" @click="switchColors('custom')">
-            <label for="radio-color-custom" style="margin-left: .2rem;">Custom</label>
+        <div class="inline-flex items-center mt-2">
+            <input id="radio-color-custom" class="inline form-radio" type="radio" v-model="selectedGroup" value="custom" @click="switchColors('custom')">
+            <label for="radio-color-custom" class="inline" style="margin-left: .2rem;">Custom</label>
         </div>
       </div>
      
@@ -162,6 +162,10 @@ export default {
 };
 </script>
 <style scoped>
+
+  .inline {
+    display: inline;
+  }
   .shadow-sm {
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
@@ -192,6 +196,9 @@ export default {
   }
   .mt-1 {
     margin-top: 0.25rem;
+  }
+  .mt-2 {
+    margin-top: 0.5rem;
   }
   .px-1 {
     padding-left: 0.25rem;
