@@ -70,10 +70,9 @@
   </div>
 </template>
 <script>
+import '../css/tailwind.css'
 import ClickOutside from 'vue-click-outside'
 import colors from 'tailwindcss/colors'
-// Import tailwindcss
-import '../css/tailwind.css'
 
 export default {
   mixins: [ BardToolbarButton ],
