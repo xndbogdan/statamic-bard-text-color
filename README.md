@@ -27,8 +27,9 @@ Please check [this](https://github.com/xndbogdan/statamic-bard-text-color/blob/m
 
 ## Planned features
 
-- Pulling colors from tailwind.config.js automatically
-- Upgrading to Vue 3
+- Pull colors from tailwind.config.js automatically
+- Upgrade to Vue 3
+- Upgrade to Vite
 - Improve user experience
 
 ## Credits
