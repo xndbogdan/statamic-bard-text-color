@@ -95,18 +95,18 @@ export default {
   methods: {
     onClickOutside() {
       this.showColorMenu = false;
-      this.filter = ''
+      // this.filter = ''
     },
     toggleColorMenu() {
       this.showColorMenu = !this.showColorMenu;
-      this.filter = ''
+      // this.filter = ''
     },
     setColor(color) {
       // this.filter = ''
       this.editor.commands.changeTextColor({
         color: color === this.currentColor ? false : color,
       })
-      // this.showColorMenu = false
+      this.showColorMenu = false
     },
     switchColors(group) {
       switch(group) {
