@@ -1,6 +1,6 @@
 {
   "require": {
-    "statamic/cms": "^4.0"
+    "statamic/cms": "^5.0"
   },
   "name": "xndbogdan/statamic-bard-text-color",
   "license": [
