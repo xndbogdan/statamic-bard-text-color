@@ -6,7 +6,7 @@
 
 ## Introduction
 
-![alt text](https://github.com/xndbogdan/statamic-bard-text-color/raw/main/preview_v4.0.png  "Preview")
+![alt text](https://github.com/xndbogdan/statamic-bard-text-color/raw/main/preview_v5.0.1.png  "Preview")
 
 This is a statamic bard plugin that lets you change text color!
 It allows you to use the default tailwind palette, but you can also add your own.
@@ -30,7 +30,6 @@ Please check [this](https://github.com/xndbogdan/statamic-bard-text-color/blob/m
 - Pull colors from tailwind.config.js automatically
 - Upgrade to Vue 3
 - Upgrade to Vite
-- Improve user experience
 
 ## Credits
 
