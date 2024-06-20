@@ -39,4 +39,5 @@ Big thanks to:
 - [Bernhard Berger](https://github.com/bernhardberger) for participating in active development.
 - [Hesesses](https://github.com/Hesesses) for suggesting a custom color implementation.
 - [ncla](https://github.com/ncla) for showing a working example in a project implementation.
-- [Jelle Roorda](https://github.com/jelleroorda) from the Statamic discord, for providing resources & advice on how to sucessfuly implement the feature.
+- [Jelle Roorda](https://github.com/jelleroorda) from the Statamic discord, for providing resources & advice on 
+- [Max Baan](https://github.com/pixelastronauts) for providing a solution to styling issues caused by Tailwind preflight.
