@@ -1,0 +1,11 @@
+{
+  "resources/js/bard.js": {
+    "file": "assets/bard-eEUO9ouy.js",
+    "name": "bard",
+    "src": "resources/js/bard.js",
+    "isEntry": true,
+    "css": [
+      "assets/bard-D3wmqTSo.css"
+    ]
+  }
+}
