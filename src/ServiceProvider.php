@@ -1,15 +1,16 @@
 <?php
+
 namespace XndBogdan\BardTextColor;
 
 use Statamic\Statamic;
-use Illuminate\Support\Facades\View;
 use Statamic\Fieldtypes\Bard\Augmentor;
 use Statamic\Providers\AddonServiceProvider;
 
 class ServiceProvider extends AddonServiceProvider
 {
-    protected $scripts = [
-        __DIR__.'/../dist/js/textcolor.js',
+    protected $vite = [
+        'input' => ['resources/js/bard.js'],
+        'publicDirectory' => 'resources/dist',
     ];
 
     public function register()
@@ -17,7 +18,8 @@ class ServiceProvider extends AddonServiceProvider
         $this->app->bind(\Statamic\Fieldtypes\Bard::class, Bard::class);
     }
 
-    public function boot() {
+    public function boot()
+    {
         parent::boot();
 
         $this->publishes([
@@ -25,6 +27,7 @@ class ServiceProvider extends AddonServiceProvider
         ], 'bard-custom-colors');
 
         Augmentor::addExtension('text-color', new TextColor());
+
         Statamic::provideToScript([
             'bard-custom-colors' => config('bard-custom-colors.custom_colors', config('bard-custom-colors')),
             'bard-default-colors' => config('bard-custom-colors.default_colors'),

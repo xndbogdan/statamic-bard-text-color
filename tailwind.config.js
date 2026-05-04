@@ -1,13 +1,10 @@
-module.exports = {
-  content: [
-    './resources/**/*.{vue,js,ts,jsx,tsx}',
-    './src/*.php',
-  ],
-  theme: {
-      extend: {},
-  },
-  plugins: [],
+export default {
+  prefix: 'btc-',
+  darkMode: ['class', '[class~="dark"]'],
+  content: ['./resources/js/**/*.{vue,js}'],
   corePlugins: {
-      preflight: false,
+    preflight: false,
   },
-}
+  theme: {},
+  plugins: [],
+};
